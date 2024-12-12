@@ -60,47 +60,75 @@ class SecondRoute extends StatelessWidget {
           //   },
           //   child: Text('hello'),
           // ),
-          Container(
-            height: 230,
-            width: 360,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                  image: AssetImage("assets/sunny.jpg"), fit: BoxFit.cover),
+          // Container(
+          //   height: 230,
+          //   width: 360,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(20),
+          //     image: DecorationImage(
+          //         image: AssetImage("assets/sunny.jpg"), fit: BoxFit.cover),
+          //   ),
+          //   child: Padding(
+          //       padding: EdgeInsets.only(top: 5),
+          //       child: Center(
+          //         child: Column(
+          //           children: [
+          //             Text(
+          //               cityName,
+          //               style: TextStyle(
+          //                 fontSize: 25,
+          //                 color: Colors.white,
+          //                 fontFamily: 'Schyler',
+          //               ),
+          //             ),
+          //             const SizedBox(
+          //               height: 4,
+          //             ),
+          //             Text(
+          //               '25°',
+          //               style: TextStyle(
+          //                   fontSize: 100,
+          //                   fontFamily: 'Schyler',
+          //                   color: Colors.black),
+          //             ),
+          //             Text(
+          //               'snow',
+          //               style: TextStyle(
+          //                   fontSize: 20,
+          //                   fontFamily: 'Schyler',
+          //                   color: Colors.black),
+          //             )
+          //           ],
+          //         ),
+          //       )),
+          // ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            cityName,
+            style: const TextStyle(
+              fontSize: 25,
+              color: Colors.black,
+              fontFamily: 'Schyler',
             ),
-            child: Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        cityName,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontFamily: 'Schyler',
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        '25°',
-                        style: TextStyle(
-                            fontSize: 100,
-                            fontFamily: 'Schyler',
-                            color: Colors.black),
-                      ),
-                      Text(
-                        'snow',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'Schyler',
-                            color: Colors.black),
-                      )
-                    ],
-                  ),
-                )),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Image.asset(
+            "assets/sun.png",
+            height: 120,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            '25°',
+            style: TextStyle(
+                fontSize: 50,
+                fontFamily: 'Schyler',
+                color: Color.fromRGBO(74, 90, 129, 10)),
           ),
           const SizedBox(
             height: 80,

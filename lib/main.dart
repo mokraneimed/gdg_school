@@ -100,6 +100,7 @@ class _HomeState extends State<Home> {
                                         NullMessage = 'enter a city!';
                                       } else {
                                         getData();
+                                        Navigator.pop(context);
                                       }
                                     },
                                     child: const Text('Add city')),
