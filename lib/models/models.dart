@@ -17,19 +17,20 @@
   }
 */
 
-import 'package:flutter/material.dart';
-import 'package:gdg_school/main.dart';
 
 class WeatherInfo {
-  final String mainInfo;
-  final String iconInfo;
-  WeatherInfo({required this.mainInfo, required this.iconInfo});
+  final String mainCondition; // Renamed for clarity
+  final String icon;
+
+  WeatherInfo({required this.mainCondition, required this.icon});
+
   factory WeatherInfo.fromJson(Map<String, dynamic> json) {
-    final mainInfo = json['main'];
-    final iconInfo = json['icon'];
-    return WeatherInfo(mainInfo: mainInfo, iconInfo: iconInfo);
+    final mainCondition = json['main']; // Extract "main" (e.g., "Rain")
+    final icon = json['icon'];          // Extract "icon" (e.g., "01d")
+    return WeatherInfo(mainCondition: mainCondition, icon: icon);
   }
 }
+
 
 class TempuratureInfo {
   final double tempInfo;
@@ -57,17 +58,26 @@ class TempuratureInfo {
 class WeatherResponse {
   final String cityName;
   final TempuratureInfo tempInfo;
-  final WeatherInfo weatInfo;
-  WeatherResponse(
-      {required this.cityName, required this.tempInfo, required this.weatInfo});
+  final WeatherInfo weatherInfo;
+
+  WeatherResponse({
+    required this.cityName,
+    required this.tempInfo,
+    required this.weatherInfo,
+  });
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
     final cityName = json['name'];
-    final tempInfojson = json['main'];
-    final tempInfo = TempuratureInfo.fromJson(tempInfojson);
-    final WeatherInfojson = json['weather'][0];
-    final weatInfo = WeatherInfo.fromJson(WeatherInfojson);
+    final tempInfoJson = json['main'];
+    final tempInfo = TempuratureInfo.fromJson(tempInfoJson);
+
+    final weatherInfoJson = json['weather'][0]; // Extract the first element of the "weather" array
+    final weatherInfo = WeatherInfo.fromJson(weatherInfoJson);
+
     return WeatherResponse(
-        cityName: cityName, tempInfo: tempInfo, weatInfo: weatInfo);
+      cityName: cityName,
+      tempInfo: tempInfo,
+      weatherInfo: weatherInfo,
+    );
   }
 }

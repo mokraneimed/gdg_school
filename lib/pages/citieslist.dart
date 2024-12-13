@@ -1,5 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:gdg_school/secondrouter.dart';
+import 'package:gdg_school/pages/secondrouter.dart';
+import 'package:lottie/lottie.dart';
 
 class City extends StatelessWidget {
   String cityName;
@@ -8,12 +11,32 @@ class City extends StatelessWidget {
   double min;
   String icon;
   City(
-      {required this.cityName,
+      {super.key,
+      required this.cityName,
       required this.temp,
       required this.max,
       required this.min,
       required this.icon});
+
+  String getWeatherCondition(String? maincondition) {
+    // if (maincondition == null) return "assets/sunny.json";
+    switch (maincondition?.toLowerCase()) {
+      case "clouds":
+        return "assets/windy.json";
+      case "rain":
+        return "assets/rainy.json";
+      case "clear":
+        return "assets/sunny.json";
+      case "thunderstorm":
+        return "assets/windy_sun.json";
+      default:
+        return "assets/windy.json";
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    temp = temp.round() - 273;
     return Column(children: [
       ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -21,42 +44,45 @@ class City extends StatelessWidget {
               foregroundColor: const Color.fromRGBO(74, 90, 129, 10),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(
-                      color: const Color.fromRGBO(
+                  side: const BorderSide(
+                      color: Color.fromRGBO(
                           228, 236, 252, 1.0)))) // Background color
           ,
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SecondRoute(
-                        cityName: cityName,
-                        temp: temp,
-                        max: max,
-                        min: min,
-                        icon: icon,
-                      )),
+                builder: (context) => SecondRoute(
+                  cityName: cityName,
+                  temp: temp,
+                  max: max,
+                  min: min,
+                  // icon: icon,
+                  icon: getWeatherCondition(icon),
+                ),
+              ),
             );
           },
-          child: Container(
+          child: SizedBox(
               height: 90,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.wb_sunny,
-                          color: Colors.yellow[600],
+                        Lottie.asset(
+                          getWeatherCondition(
+                              icon), // Ensure this returns a valid Lottie file path
+                          height: 70, // Adjust size as needed
                         ),
                         Padding(
-                            padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   cityName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color.fromRGBO(74, 90, 129, 10),
                                     fontSize: 20,
                                     fontFamily: 'Schyler',
@@ -64,7 +90,7 @@ class City extends StatelessWidget {
                                 ),
                                 Text(
                                   cityName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color.fromRGBO(74, 90, 129, 10),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w300,
@@ -75,14 +101,12 @@ class City extends StatelessWidget {
                             )),
                       ],
                     ),
-                    Container(
-                      child: Text(
-                        '$temp',
-                        style: TextStyle(
-                          color: const Color.fromRGBO(74, 90, 129, 10),
-                          fontSize: 20,
-                          fontFamily: 'Schyler',
-                        ),
+                    Text(
+                      '$temp',
+                      style: const TextStyle(
+                        color: Color.fromRGBO(74, 90, 129, 10),
+                        fontSize: 20,
+                        fontFamily: 'Schyler',
                       ),
                     )
                   ]))),
