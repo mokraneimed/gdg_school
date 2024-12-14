@@ -1,5 +1,6 @@
 import 'package:gdg_school/dataservice.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_school/element.dart';
 import 'package:gdg_school/secondrouter.dart';
 import 'models.dart';
 import 'dart:io';
@@ -119,36 +120,38 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        body: Padding(
-            padding: EdgeInsets.all(20),
-            child: ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  final item = list[index];
-                  return Dismissible(
-                      key: UniqueKey(),
-                      onDismissed: (direction) {
-                        setState(() {
-                          list.removeAt(index);
-                          list_temp.removeAt(index);
-                          list_max.removeAt(index);
-                          list_min.removeAt(index);
-                          list_icon.removeAt(index);
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('$item dismissed')));
-                      },
-                      background: Container(
-                        color: Color.fromRGBO(74, 90, 129, 10),
-                      ),
-                      child: City(
-                        cityName: list[index],
-                        temp: list_temp[index],
-                        max: list_max[index],
-                        min: list_min[index],
-                        icon: list_icon[index],
-                      ));
-                })));
+        body: Element1(),
+        // body: Padding(
+        //     padding: EdgeInsets.all(20),
+        //     child: ListView.builder(
+        //         itemCount: list.length,
+        //         itemBuilder: (context, index) {
+        //           final item = list[index];
+        //           return Dismissible(
+        //               key: UniqueKey(),
+        //               onDismissed: (direction) {
+        //                 setState(() {
+        //                   list.removeAt(index);
+        //                   list_temp.removeAt(index);
+        //                   list_max.removeAt(index);
+        //                   list_min.removeAt(index);
+        //                   list_icon.removeAt(index);
+        //                 });
+        //                 ScaffoldMessenger.of(context).showSnackBar(
+        //                     SnackBar(content: Text('$item dismissed')));
+        //               },
+        //               background: Container(
+        //                 color: Color.fromRGBO(74, 90, 129, 10),
+        //               ),
+        //               child: City(
+        //                 cityName: list[index],
+        //                 temp: list_temp[index],
+        //                 max: list_max[index],
+        //                 min: list_min[index],
+        //                 icon: list_icon[index],
+        //               ));
+        //         }))
+                );
   }
 
   void getData() async {
